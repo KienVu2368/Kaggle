@@ -1,0 +1,73 @@
+# start YAML
+
+toxic_types:
+  - toxic
+  - severe_toxic
+  - obscene
+  - threat
+  - insult
+  - identity_hate
+
+logistic:
+  C: 10
+  tfidf:
+    max_word_ngram: 2
+    max_char_ngram: 6
+    stack: True
+
+blending:
+  data_split:
+    test_size: 0.2
+    random_state: 2017
+  tfidf:
+    max_word_ngram: 3
+    max_char_ngram: 6
+    stack: False
+  models:
+    Logistic:
+      C: 
+        - 10
+        - 30
+    MultinomialNB:
+      alpha:
+        - 0.3
+        - 0.6
+
+xgboost:
+  param:
+    objective: binary:logistic
+    max_depth: 3 #degree to reduce overfit [default=6] range: [0,∞]
+    min_child_weight: 0.2 # degree to reduce overfit [default=1] range: [0,∞]
+    gamma: 0 #degree to reduce overfit default=0,range: [0,∞]    
+    silent: 0
+    eval_metric: logloss
+    subsample: 0.5 #degree to reduce overfit [default=1] range: (0,1]
+    colsample_bytree: 0.5 #degree to reduce overfit [default=1] range: (0,1]
+    eta: 0.2 #degree to reduce overfit default=0.3 range: [0,1]    
+  num_rounds: 400  
+
+essemble:
+  predicted:
+    - submission_13.csv
+    - LSTM_baseline.csv
+    - nb_svm_baseline.csv
+  geometric_mean: True
+
+preds:
+  test_len: 226998
+  output_len: 6
+
+
+CNN_wordlevel:
+  max_length: 300
+  output_len: 6
+  max_range: 7
+  epochs: 10
+  batch_size: 200
+
+CNN_subwordlevel:
+  max_length: 10000
+  output_len: 6
+  max_range: 7
+  epochs: 10
+  batch_size: 200
