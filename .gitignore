@@ -1,0 +1,12 @@
+
+/toxic_comment_not upload/
+/toxic_comment/data/
+/toxic_comment/model_preview/
+/toxic_comment/submission/
+
+/home_credit_default_risk/submission/
+/home_credit_default_risk/data/
+/home_credit_default_risk/old nb/
+ipynb_checkpoints/
+/ipynb_checkpoints/
+*ipynb_checkpoints/
